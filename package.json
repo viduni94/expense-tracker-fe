@@ -1,0 +1,87 @@
+{
+  "name": "react-quickstart",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "cross-env ESLINT_NO_DEV_ERRORS=true react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --silent",
+    "test:no-watch": "ultra test --watchAll=false",
+    "test:coverage": "react-scripts test --silent --coverage --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint": "ultra eslint && ultra stylelint && ultra prettier",
+    "lint:fix": "ultra eslint:fix && ultra stylelint:fix && ultra prettier:fix",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint --fix .",
+    "stylelint": "stylelint .",
+    "stylelint:fix": "stylelint --fix .",
+    "prettier": "prettier --check './**/*.{js,jsx,ts,tsx,css,json}' --config ./.prettierrc",
+    "prettier:fix": "prettier --write './**/*.{js,jsx,ts,tsx,css,json}' --config ./.prettierrc",
+    "postinstall": "husky install"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js",
+      "!src/store.js"
+    ]
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.7.1",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.0",
+    "@testing-library/user-event": "^13.2.0",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.16.5",
+    "@babel/preset-react": "^7.16.7",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-import": "^0.13.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest-dom": "^4.0.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-testing-library": "^5.0.3",
+    "eslint-plugin-unicorn": "^40.0.0",
+    "husky": "^7.0.1",
+    "istanbul": "^0.4.5",
+    "prettier": "^2.4.0",
+    "sass": "^1.47.0",
+    "sass-loader": "^12.1.0",
+    "stylelint": "^14.2.0",
+    "stylelint-config-css-modules": "^2.2.0",
+    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-high-performance-animation": "^1.5.1",
+    "stylelint-no-unsupported-browser-features": "^5.0.1",
+    "ultra-runner": "^3.10.5"
+  }
+}

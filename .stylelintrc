@@ -1,0 +1,16 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-css-modules"],
+  "plugins": [
+    "stylelint-scss",
+    "stylelint-no-unsupported-browser-features",
+    "stylelint-high-performance-animation"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "no-descending-specificity": null,
+    "plugin/no-low-performance-animation-properties": true,
+    "string-quotes": "single"
+  },
+  "ignoreFiles": ["!**/*.css", "!**/*.scss"]
+}
