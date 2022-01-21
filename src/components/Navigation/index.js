@@ -57,7 +57,9 @@ const drawer = (
 
 const Navigation = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+
   const location = useLocation();
+
   let pageTitle;
   switch (location.pathname) {
     case constants.pages.spending.path: {

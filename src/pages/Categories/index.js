@@ -1,9 +1,7 @@
 import { memo, useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import cx from 'classnames';
-// import { increment } from './categoriesSlice';
 import pageStyles from 'pages/pages.module.scss';
 import Alert from '@mui/material/Alert';
 import CategoryTable from './components/CategoryTable';

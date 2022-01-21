@@ -9,9 +9,6 @@ export const transactionsApi = createApi({
   endpoints: builder => ({
     getAllTransactions: builder.query({
       query: () => `${ENTITY_PATH}`,
-      transformResponse: () => ({
-        asd: 123,
-      }),
     }),
     getTransactionById: builder.query({
       query: id => `${ENTITY_PATH}/${id}`,

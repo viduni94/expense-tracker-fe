@@ -1,36 +1,53 @@
-import { memo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { memo, useState } from 'react';
 import cx from 'classnames';
-import ReactLogo from 'components/ReactLogo';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
 import { useGetAllTransactionsQuery } from '../../services/transactions';
-import { increment } from './transactionsSlice';
+import { useGetAllCategoriesQuery } from '../../services/categories';
 import pageStyles from 'pages/pages.module.scss';
+import TransactionsTable from './components/TransactionsTable';
+import AddTransactionModal from './components/AddTransactionModal';
 import styles from './transactions.module.scss';
 
 const Transactions = () => {
-  const count = useSelector(({ transactions }) => transactions.value);
-  const dispatch = useDispatch();
+  const [openAddTransactionModal, setOpenAddTransactionModal] = useState(false);
 
-  const { error, isLoading } = useGetAllTransactionsQuery();
+  const { data, refetch: refetchTransactions } = useGetAllTransactionsQuery();
+  const { data: categories } = useGetAllCategoriesQuery();
 
-  let transactions;
-
-  if (isLoading) {
-    transactions = <div>Transactions loading...</div>;
-  } else if (error) {
-    transactions = <div>Transactions error...</div>;
-  } else {
-    transactions = <div>Transactions fetched...</div>;
-  }
+  const toggleAddTransactionModal = () => {
+    setOpenAddTransactionModal(!openAddTransactionModal);
+  };
 
   return (
     <div className={cx(pageStyles.container, styles.main)}>
-      <ReactLogo onClick={() => dispatch(increment())} />
-      <h2>Transactions</h2>
-      <div data-testid="count" hidden>
-        {count}
+      <div className={cx(pageStyles.container, styles.main)}>
+        <Container maxWidth="md" className={styles.container}>
+          <div className={styles.addButtonContainer}>
+            <Button variant="contained" onClick={toggleAddTransactionModal}>
+              Add Transaction
+            </Button>
+          </div>
+          {data?.length ? (
+            <TransactionsTable
+              transactions={data}
+              refetchTransactions={refetchTransactions}
+              categories={categories}
+            />
+          ) : (
+            <Alert severity="info">No transactions available</Alert>
+          )}
+        </Container>
+        {openAddTransactionModal ? (
+          <AddTransactionModal
+            open={openAddTransactionModal}
+            toggle={toggleAddTransactionModal}
+            refetchTransactions={refetchTransactions}
+            categories={categories}
+          />
+        ) : undefined}
       </div>
-      {transactions}
     </div>
   );
 };
