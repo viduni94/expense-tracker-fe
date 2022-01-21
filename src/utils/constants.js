@@ -1,8 +1,30 @@
 export default {
-  paths: {
-    home: '/',
+  pages: {
+    transactions: {
+      path: '/',
+      title: 'Transactions',
+    },
+    spending: {
+      path: '/spending',
+      title: 'Spending',
+    },
+    categories: {
+      path: '/categories',
+      title: 'Categories',
+    },
+    budget: {
+      path: '/budget',
+      title: 'Budget',
+    },
+    reports: {
+      path: '/reports',
+      title: 'Reports',
+    },
   },
-  links: {
-    readme: 'https://github.com/sachie/react-quickstart#react-quickstart-by-sachie',
+  api: {
+    basePath: 'http://localhost:8080',
+  },
+  navigation: {
+    drawerWidth: 240,
   },
 };

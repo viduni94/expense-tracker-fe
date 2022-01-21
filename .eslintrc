@@ -52,53 +52,13 @@
       "props": true,
       "ignorePropertyModificationsFor": ["state"]
     }],
-    "import/order": [2, {
-      "groups": [
-        "builtin",
-        "external",
-        "internal",
-        "parent",
-        "sibling",
-        "index",
-        "unknown"
-      ],
-      "pathGroups": [
-        {
-          "pattern": "react**",
-          "group": "external",
-          "position": "before"
-        },
-        {
-          "pattern": "@material-ui/**",
-          "group": "external",
-          "position": "after"
-        },
-        {
-          "pattern": "**/*.scss",
-          "group": "sibling",
-          "position": "after"
-        },
-        {
-          "pattern": "./*.scss",
-          "group": "sibling",
-          "position": "after"
-        }
-      ],
-      "pathGroupsExcludedImportTypes": [],
-      "newlines-between": "never",
-      "alphabetize": {
-        "order": "asc",
-        "caseInsensitive": true
-      }
-    }],
+    "import/order": 0,
+    "react/prop-types": 0,
     "react/prefer-stateless-function": [2, { "ignorePureComponents": true }],
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-no-literals": [2, {
-      "noStrings": true,
-      "ignoreProps": true
-    }],
+    "react/jsx-no-literals": 0,
     "react/jsx-tag-spacing": [2, {
       "closingSlash": "never",
       "beforeSelfClosing": "always",

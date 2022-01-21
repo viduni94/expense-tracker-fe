@@ -1,0 +1,42 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+}
+
+.container {
+  padding: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .addButtonContainer {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .editIcon {
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 479px) {
+    padding: 1rem;
+
+    .addButtonContainer {
+      justify-content: center;
+    }
+  }
+}
+
+.formField {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.submitButton {
+  margin: 20px auto;
+  float: right;
+}

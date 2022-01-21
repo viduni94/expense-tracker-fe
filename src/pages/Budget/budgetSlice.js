@@ -4,8 +4,8 @@ const initialState = {
   value: 0,
 };
 
-export const homeSlice = createSlice({
-  name: 'home',
+export const budgetSlice = createSlice({
+  name: 'budget',
   initialState,
   reducers: {
     increment: state => {
@@ -14,6 +14,6 @@ export const homeSlice = createSlice({
   },
 });
 
-export const { increment } = homeSlice.actions;
+export const { increment } = budgetSlice.actions;
 
-export default homeSlice.reducer;
+export default budgetSlice.reducer;
