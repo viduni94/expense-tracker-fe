@@ -5,6 +5,7 @@ import categoriesReducer from 'pages/Categories/categoriesSlice';
 import spendingReducer from 'pages/Spending/spendingSlice';
 import transactionsReducer from 'pages/Transactions/transactionsSlice';
 import { transactionsApi } from './services/transactions';
+import { categoriesApi } from './services/categories';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     categories: categoriesReducer,
     budget: budgetReducer,
     [transactionsApi.reducerPath]: transactionsApi.reducer,
+    [categoriesApi.reducerPath]: categoriesApi.reducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(transactionsApi.middleware),

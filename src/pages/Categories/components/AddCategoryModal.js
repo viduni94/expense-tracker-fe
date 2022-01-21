@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -9,6 +9,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
 import styles from '../categories.module.scss';
+import { useAddCategoryMutation } from '../../../services/categories';
 
 const style = {
   position: 'absolute',
@@ -23,6 +24,16 @@ const style = {
 };
 
 const AddCategoryModal = ({ open, toggle }) => {
+  const [name, setName] = useState('');
+  const [budget, setBudget] = useState();
+
+  const [addCategory] = useAddCategoryMutation();
+
+  const submitCategory = () => {
+    addCategory({ name, budget });
+    toggle();
+  };
+
   return (
     <div>
       <Modal
@@ -42,13 +53,22 @@ const AddCategoryModal = ({ open, toggle }) => {
             </Typography>
             <FormControl className={styles.formField}>
               <InputLabel htmlFor="name">Name</InputLabel>
-              <Input id="name" />
+              <Input id="name" value={name} onChange={e => setName(e.target.value)} />
             </FormControl>
             <FormControl className={styles.formField}>
               <InputLabel htmlFor="budget">Budget</InputLabel>
-              <Input id="budget" />
+              <Input
+                id="budget"
+                type="number"
+                value={budget}
+                onChange={e => setBudget(e.target.value)}
+              />
             </FormControl>
-            <Button variant="contained" className={styles.submitButton}>
+            <Button
+              variant="contained"
+              className={styles.submitButton}
+              onClick={submitCategory}
+              disabled={!name}>
               Submit
             </Button>
           </Box>

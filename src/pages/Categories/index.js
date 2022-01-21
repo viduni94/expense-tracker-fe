@@ -7,12 +7,12 @@ import cx from 'classnames';
 import pageStyles from 'pages/pages.module.scss';
 import CategoryTable from './components/CategoryTable';
 import AddCategoryModal from './components/AddCategoryModal';
+import { useGetAllCategoriesQuery } from '../../services/categories';
 import styles from './categories.module.scss';
 
 const Categories = () => {
   const [openAddCategoryModal, setOpenAddCategoryModal] = useState(false);
-  // const count = useSelector(({ categories }) => categories.value);
-  // const dispatch = useDispatch();
+  const { data } = useGetAllCategoriesQuery();
 
   const toggleAddCategoryModal = () => {
     setOpenAddCategoryModal(!openAddCategoryModal);
@@ -26,7 +26,7 @@ const Categories = () => {
             Add Category
           </Button>
         </div>
-        <CategoryTable />
+        {data ? <CategoryTable categories={data} /> : undefined}
       </Container>
       <AddCategoryModal open={openAddCategoryModal} toggle={toggleAddCategoryModal} />
     </div>

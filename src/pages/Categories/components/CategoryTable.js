@@ -21,19 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const createData = (name, calories, fat, carbs, protein) => {
-  return { name, calories, fat, carbs, protein };
-};
-
-const rows = [
-  createData('Frozen yoghurt', 159, <EditIcon />),
-  createData('Ice cream sandwich', 237, <EditIcon />),
-  createData('Eclair', 262, <EditIcon />),
-  createData('Cupcake', 305, <EditIcon />),
-  createData('Gingerbread', 356, <EditIcon />),
-];
-
-const CategoryTable = () => {
+const CategoryTable = ({ categories }) => {
   const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
 
   const toggleEditCategoryModal = () => {
@@ -52,17 +40,19 @@ const CategoryTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            {categories.map(category => (
+              <TableRow
+                key={category.name}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {category.name}
                 </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
+                <TableCell align="right">{category.budget}</TableCell>
                 <TableCell
                   align="right"
                   className={styles.editIcon}
                   onClick={toggleEditCategoryModal}>
-                  {row.fat}
+                  <EditIcon />
                 </TableCell>
               </TableRow>
             ))}
