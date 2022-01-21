@@ -23,14 +23,15 @@ const style = {
   p: 4,
 };
 
-const AddCategoryModal = ({ open, toggle }) => {
+const AddCategoryModal = ({ open, toggle, refetchCategories }) => {
   const [name, setName] = useState('');
   const [budget, setBudget] = useState();
 
   const [addCategory] = useAddCategoryMutation();
 
-  const submitCategory = () => {
-    addCategory({ name, budget });
+  const submitCategory = async () => {
+    await addCategory({ name, budget });
+    refetchCategories();
     toggle();
   };
 

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
+import { useUpdateCategoryMutation } from '../../../services/categories';
 import styles from '../categories.module.scss';
 
 const style = {
@@ -22,7 +23,18 @@ const style = {
   p: 4,
 };
 
-const EditCategoryModal = ({ open, toggle }) => {
+const EditCategoryModal = ({ open, toggle, selectedCategory, refetchCategories }) => {
+  const [name, setName] = useState(selectedCategory.name);
+  const [budget, setBudget] = useState(selectedCategory.budget);
+
+  const [updateCategory] = useUpdateCategoryMutation();
+
+  const editCategory = async () => {
+    await updateCategory({ id: selectedCategory.id, name, budget });
+    refetchCategories();
+    toggle();
+  };
+
   return (
     <div>
       <Modal
@@ -42,13 +54,17 @@ const EditCategoryModal = ({ open, toggle }) => {
             </Typography>
             <FormControl className={styles.formField}>
               <InputLabel htmlFor="name">Name</InputLabel>
-              <Input id="name" />
+              <Input id="name" value={name} onChange={e => setName(e.target.value)} />
             </FormControl>
             <FormControl className={styles.formField}>
               <InputLabel htmlFor="budget">Budget</InputLabel>
-              <Input id="budget" />
+              <Input id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
             </FormControl>
-            <Button variant="contained" className={styles.submitButton}>
+            <Button
+              variant="contained"
+              className={styles.submitButton}
+              onClick={editCategory}
+              disabled={!name}>
               Submit
             </Button>
           </Box>

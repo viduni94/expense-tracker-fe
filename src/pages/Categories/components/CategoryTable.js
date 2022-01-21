@@ -21,11 +21,17 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const CategoryTable = ({ categories }) => {
+const CategoryTable = ({ categories, refetchCategories }) => {
   const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
+  const [selectedCategory, setSetSelectedCategory] = useState();
 
   const toggleEditCategoryModal = () => {
     setOpenEditCategoryModal(!openEditCategoryModal);
+  };
+
+  const onClickEditCategory = category => {
+    toggleEditCategoryModal();
+    setSetSelectedCategory(category);
   };
 
   return (
@@ -51,7 +57,7 @@ const CategoryTable = ({ categories }) => {
                 <TableCell
                   align="right"
                   className={styles.editIcon}
-                  onClick={toggleEditCategoryModal}>
+                  onClick={() => onClickEditCategory(category)}>
                   <EditIcon />
                 </TableCell>
               </TableRow>
@@ -59,7 +65,14 @@ const CategoryTable = ({ categories }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <EditCategoryModal open={openEditCategoryModal} toggle={toggleEditCategoryModal} />
+      {selectedCategory ? (
+        <EditCategoryModal
+          open={openEditCategoryModal}
+          toggle={toggleEditCategoryModal}
+          selectedCategory={selectedCategory}
+          refetchCategories={refetchCategories}
+        />
+      ) : undefined}
     </>
   );
 };
