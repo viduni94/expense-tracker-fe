@@ -24,8 +24,18 @@ export const categoriesApi = createApi({
         body: category,
       }),
     }),
+    deleteCategory: builder.mutation({
+      query: id => ({
+        url: `${ENTITY_PATH}/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useGetAllCategoriesQuery, useAddCategoryMutation, useUpdateCategoryMutation } =
-  categoriesApi;
+export const {
+  useGetAllCategoriesQuery,
+  useAddCategoryMutation,
+  useUpdateCategoryMutation,
+  useDeleteCategoryMutation,
+} = categoriesApi;

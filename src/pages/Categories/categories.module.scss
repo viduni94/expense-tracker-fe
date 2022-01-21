@@ -18,7 +18,7 @@
     margin-bottom: 20px;
   }
 
-  .editIcon {
+  .actionIcon {
     cursor: pointer;
   }
 
@@ -39,4 +39,8 @@
 .submitButton {
   margin: 20px auto;
   float: right;
+}
+
+.deleteErrorAlert {
+  margin-top: 1rem;
 }

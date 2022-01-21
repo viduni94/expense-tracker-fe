@@ -8,8 +8,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Alert from '@mui/material/Alert';
 import styles from '../categories.module.scss';
 import EditCategoryModal from './EditCategoryModal';
+import DeleteCategoryConfirmation from './DeleteCategoryConfirmation';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -23,15 +26,26 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const CategoryTable = ({ categories, refetchCategories }) => {
   const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
-  const [selectedCategory, setSetSelectedCategory] = useState();
+  const [openDeleteCategoryConfirmation, setOpenDeleteCategoryConfirmation] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [deleteError, setDeleteError] = useState();
 
   const toggleEditCategoryModal = () => {
     setOpenEditCategoryModal(!openEditCategoryModal);
   };
 
+  const toggleDeleteCategoryConfrimation = () => {
+    setOpenDeleteCategoryConfirmation(!openDeleteCategoryConfirmation);
+  };
+
   const onClickEditCategory = category => {
     toggleEditCategoryModal();
-    setSetSelectedCategory(category);
+    setSelectedCategory(category);
+  };
+
+  const onClickDeleteCategory = category => {
+    toggleDeleteCategoryConfrimation();
+    setSelectedCategory(category);
   };
 
   return (
@@ -43,6 +57,7 @@ const CategoryTable = ({ categories, refetchCategories }) => {
               <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell align="right">Budget</StyledTableCell>
               <StyledTableCell align="right">Edit</StyledTableCell>
+              <StyledTableCell align="right">Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -56,21 +71,43 @@ const CategoryTable = ({ categories, refetchCategories }) => {
                 <TableCell align="right">{category.budget}</TableCell>
                 <TableCell
                   align="right"
-                  className={styles.editIcon}
+                  className={styles.actionIcon}
                   onClick={() => onClickEditCategory(category)}>
                   <EditIcon />
+                </TableCell>
+                <TableCell
+                  align="right"
+                  className={styles.actionIcon}
+                  onClick={() => onClickDeleteCategory(category)}>
+                  <DeleteIcon color="error" />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      {deleteError ? (
+        <div className={styles.deleteErrorAlert}>
+          <Alert severity="error">
+            Could not delete category. Category may have associated transactions
+          </Alert>
+        </div>
+      ) : undefined}
       {selectedCategory ? (
         <EditCategoryModal
           open={openEditCategoryModal}
           toggle={toggleEditCategoryModal}
           selectedCategory={selectedCategory}
           refetchCategories={refetchCategories}
+        />
+      ) : undefined}
+      {selectedCategory ? (
+        <DeleteCategoryConfirmation
+          open={openDeleteCategoryConfirmation}
+          toggle={toggleDeleteCategoryConfrimation}
+          selectedCategory={selectedCategory}
+          refetchCategories={refetchCategories}
+          setDeleteError={setDeleteError}
         />
       ) : undefined}
     </>
