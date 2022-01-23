@@ -10,8 +10,9 @@ export const transactionsApi = createApi({
     getAllTransactions: builder.query({
       query: () => `${ENTITY_PATH}`,
     }),
-    getTransactionById: builder.query({
-      query: id => `${ENTITY_PATH}/${id}`,
+    getTransactionByDateRange: builder.query({
+      query: (startDate, endDate) =>
+        `${ENTITY_PATH}/${startDate ? `?startdate=${startDate}&endDate=${endDate}` : ''}`,
     }),
     addTransaction: builder.mutation({
       query: transaction => ({
@@ -27,12 +28,19 @@ export const transactionsApi = createApi({
         body: transaction,
       }),
     }),
+    deleteTransaction: builder.mutation({
+      query: id => ({
+        url: `${ENTITY_PATH}/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
 export const {
   useGetAllTransactionsQuery,
-  useGetTransactionByIdQuery,
+  useGetTransactionByDateRangeQuery,
   useAddTransactionMutation,
   useUpdateTransactionMutation,
+  useDeleteTransactionMutation,
 } = transactionsApi;

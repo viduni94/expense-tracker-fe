@@ -97,7 +97,7 @@ const TransactionsTable = ({ transactions, refetchTransactions, categories }) =>
       {deleteError ? (
         <div className={styles.deleteErrorAlert}>
           <Alert severity="error">
-            Could not delete transaction. Category may have associated categories
+            Could not delete transaction. Transaction may have associated categories
           </Alert>
         </div>
       ) : undefined}
@@ -111,7 +111,7 @@ const TransactionsTable = ({ transactions, refetchTransactions, categories }) =>
           open={openEditTransactionModal}
           toggle={toggleEditTransactionModal}
           selectedTransaction={selectedTransaction}
-          refetchCategories={refetchTransactions}
+          refetchTransactions={refetchTransactions}
           categories={categories}
           setEditError={setEditError}
         />
@@ -121,7 +121,7 @@ const TransactionsTable = ({ transactions, refetchTransactions, categories }) =>
           open={openDeleteTransactionConfirmation}
           toggle={toggleDeleteTransactionConfrimation}
           selectedTransaction={selectedTransaction}
-          refetchCategories={refetchTransactions}
+          refetchTransactions={refetchTransactions}
           setDeleteError={setDeleteError}
         />
       ) : undefined}

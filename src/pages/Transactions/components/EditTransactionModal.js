@@ -46,7 +46,7 @@ const EditTransactionModal = ({
   setEditError,
 }) => {
   const [type, setType] = useState(selectedTransaction.type);
-  const [category, setCategory] = useState(selectedTransaction.category.id);
+  const [categoryId, setCategoryId] = useState(selectedTransaction.category.id);
   const [amount, setAmount] = useState(selectedTransaction.amount);
   const [note, setNote] = useState(selectedTransaction.note || '');
   const [isRecurring, setIsRecurring] = useState(!!selectedTransaction.period);
@@ -61,13 +61,13 @@ const EditTransactionModal = ({
     const { error } = await updateTransaction({
       id: selectedTransaction.id,
       type,
-      amount,
-      category,
+      amount: parseFloat(amount),
+      categoryId,
       note,
-      period,
-      frequency,
-      endDate,
-      date,
+      period: isRecurring ? period : undefined,
+      frequency: isRecurring ? frequency : undefined,
+      endDate: isRecurring ? format(endDate, 'yyyy-MM-dd') : undefined,
+      date: format(date, 'yyyy-MM-dd'),
     });
 
     if (!error) {
@@ -117,7 +117,7 @@ const EditTransactionModal = ({
                       inputFormat="yyyy-MM-dd"
                       value={date}
                       inputProps={{ 'aria-label': 'controlled' }}
-                      onChange={e => setDate(format(e, 'yyyy-MM-dd'))}
+                      onChange={e => setDate(e)}
                       renderInput={params => <TextField {...params} />}
                     />
                   ) : (
@@ -126,7 +126,7 @@ const EditTransactionModal = ({
                       inputFormat="yyyy-MM-dd"
                       value={date}
                       inputProps={{ 'aria-label': 'controlled' }}
-                      onChange={e => setDate(format(e, 'yyyy-MM-dd'))}
+                      onChange={e => setDate(e)}
                       renderInput={params => <TextField {...params} />}
                     />
                   )}
@@ -157,14 +157,14 @@ const EditTransactionModal = ({
               onChange={e => setAmount(e.target.value)}
             />
             <FormControl className={styles.formField}>
-              <InputLabel htmlFor="category">Category</InputLabel>
+              <InputLabel htmlFor="categoryId">Category</InputLabel>
               <Select
-                labelId="category"
-                id="category"
-                value={category}
+                labelId="categoryId"
+                id="categoryId"
+                value={categoryId}
                 label="Category"
                 inputProps={{ 'aria-label': 'controlled' }}
-                onChange={e => setCategory(e.target.value)}>
+                onChange={e => setCategoryId(e.target.value)}>
                 {categories.map(cat => (
                   <MenuItem key={cat.id} value={cat.id}>
                     {cat.name}
@@ -223,7 +223,7 @@ const EditTransactionModal = ({
                           inputFormat="yyyy-MM-dd"
                           value={endDate}
                           inputProps={{ 'aria-label': 'controlled' }}
-                          onChange={e => setEndDate(format(e, 'yyyy-MM-dd'))}
+                          onChange={e => setEndDate(e)}
                           renderInput={params => <TextField {...params} />}
                         />
                       ) : (
@@ -232,7 +232,7 @@ const EditTransactionModal = ({
                           inputFormat="yyyy-MM-dd"
                           value={endDate}
                           inputProps={{ 'aria-label': 'controlled' }}
-                          onChange={e => setEndDate(format(e, 'yyyy-MM-dd'))}
+                          onChange={e => setEndDate(e)}
                           renderInput={params => <TextField {...params} />}
                         />
                       )}
@@ -254,7 +254,7 @@ const EditTransactionModal = ({
               variant="contained"
               className={styles.submitButton}
               onClick={editTransaction}
-              disabled={!amount || !date || !category}>
+              disabled={!amount || !date || !categoryId}>
               Submit
             </Button>
           </Box>

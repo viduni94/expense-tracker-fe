@@ -12,11 +12,15 @@ import styles from './categories.module.scss';
 const Categories = () => {
   const [openAddCategoryModal, setOpenAddCategoryModal] = useState(false);
 
-  const { data, refetch: refetchCategories } = useGetAllCategoriesQuery();
+  const { data, refetch: refetchCategories, isFetching } = useGetAllCategoriesQuery();
 
   const toggleAddCategoryModal = () => {
     setOpenAddCategoryModal(!openAddCategoryModal);
   };
+
+  if (!isFetching && !data?.length) {
+    return <Alert severity="info">No categories available</Alert>;
+  }
 
   return (
     <div className={cx(pageStyles.container, styles.main)}>
@@ -28,9 +32,7 @@ const Categories = () => {
         </div>
         {data?.length ? (
           <CategoryTable categories={data} refetchCategories={refetchCategories} />
-        ) : (
-          <Alert severity="info">No categories available</Alert>
-        )}
+        ) : undefined}
       </Container>
       <AddCategoryModal
         open={openAddCategoryModal}

@@ -2,14 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import budgetReducer from 'pages/Budget/budgetSlice';
 import categoriesReducer from 'pages/Categories/categoriesSlice';
-import spendingReducer from 'pages/Spending/spendingSlice';
+import dashboardReducer from 'pages/Dashboard/spendingSlice';
 import transactionsReducer from 'pages/Transactions/transactionsSlice';
 import { transactionsApi } from './services/transactions';
 import { categoriesApi } from './services/categories';
 
 const store = configureStore({
   reducer: {
-    spending: spendingReducer,
+    dashboard: dashboardReducer,
     transactions: transactionsReducer,
     categories: categoriesReducer,
     budget: budgetReducer,

@@ -1,12 +1,12 @@
 export default {
   pages: {
     transactions: {
-      path: '/',
+      path: '/transactions',
       title: 'Transactions',
     },
-    spending: {
-      path: '/spending',
-      title: 'Spending',
+    dashboard: {
+      path: '/',
+      title: 'Dashboard',
     },
     categories: {
       path: '/categories',

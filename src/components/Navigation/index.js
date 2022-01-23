@@ -21,11 +21,11 @@ const drawer = (
     <Toolbar />
     <Divider />
     <List>
-      <ListItem button component={Link} to={constants.pages.spending.path}>
+      <ListItem button component={Link} to={constants.pages.dashboard.path}>
         <ListItemIcon>
           <LocalOffer />
         </ListItemIcon>
-        <ListItemText primary="Spending" />
+        <ListItemText primary="Dashboard" />
       </ListItem>
       <ListItem button component={Link} to={constants.pages.transactions.path}>
         <ListItemIcon>
@@ -62,8 +62,8 @@ const Navigation = () => {
 
   let pageTitle;
   switch (location.pathname) {
-    case constants.pages.spending.path: {
-      pageTitle = constants.pages.spending.title;
+    case constants.pages.dashboard.path: {
+      pageTitle = constants.pages.dashboard.title;
       break;
     }
     case constants.pages.transactions.path: {

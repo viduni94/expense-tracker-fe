@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useDeleteCategoryMutation } from 'services/categories';
+import { useDeleteTransactionMutation } from 'services/transactions';
 
 const DeleteTransactionConfirmation = ({
   open,
@@ -14,10 +14,10 @@ const DeleteTransactionConfirmation = ({
   refetchTransactions,
   setDeleteError,
 }) => {
-  const [deleteCategory] = useDeleteCategoryMutation();
+  const [deleteTransaction] = useDeleteTransactionMutation();
 
   const onClickDelete = async () => {
-    const { error } = await deleteCategory(selectedTransaction.id);
+    const { error } = await deleteTransaction(selectedTransaction.id);
 
     if (!error) {
       refetchTransactions();

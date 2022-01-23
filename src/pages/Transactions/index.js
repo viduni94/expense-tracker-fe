@@ -13,12 +13,16 @@ import styles from './transactions.module.scss';
 const Transactions = () => {
   const [openAddTransactionModal, setOpenAddTransactionModal] = useState(false);
 
-  const { data, refetch: refetchTransactions } = useGetAllTransactionsQuery();
+  const { data, refetch: refetchTransactions, isFetching } = useGetAllTransactionsQuery();
   const { data: categories } = useGetAllCategoriesQuery();
 
   const toggleAddTransactionModal = () => {
     setOpenAddTransactionModal(!openAddTransactionModal);
   };
+
+  if (!isFetching && !data?.length) {
+    return <Alert severity="info">No transactions available</Alert>;
+  }
 
   return (
     <div className={cx(pageStyles.container, styles.main)}>
@@ -35,9 +39,7 @@ const Transactions = () => {
               refetchTransactions={refetchTransactions}
               categories={categories}
             />
-          ) : (
-            <Alert severity="info">No transactions available</Alert>
-          )}
+          ) : undefined}
         </Container>
         {openAddTransactionModal ? (
           <AddTransactionModal

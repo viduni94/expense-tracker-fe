@@ -39,8 +39,8 @@ const style = {
 
 const AddTransactionModal = ({ open, toggle, refetchTransactions, categories }) => {
   const [type, setType] = useState('income');
-  const [category, setCategory] = useState('');
-  const [amount, setAmount] = useState();
+  const [categoryId, setCategoryId] = useState('');
+  const [amount, setAmount] = useState('');
   const [note, setNote] = useState('');
   const [isRecurring, setIsRecurring] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -52,14 +52,14 @@ const AddTransactionModal = ({ open, toggle, refetchTransactions, categories }) 
 
   const submitTransaction = async () => {
     const { error } = await addTransaction({
-      date,
+      date: format(date, 'yyyy-MM-dd'),
       type,
-      category,
-      amount,
+      categoryId,
+      amount: parseFloat(amount),
       note,
-      period,
-      frequency,
-      endDate,
+      period: isRecurring ? period : undefined,
+      frequency: isRecurring ? frequency : undefined,
+      endDate: isRecurring ? format(endDate, 'yyyy-MM-dd') : undefined,
     });
 
     if (!error) {
@@ -107,7 +107,7 @@ const AddTransactionModal = ({ open, toggle, refetchTransactions, categories }) 
                       inputFormat="yyyy-MM-dd"
                       value={date}
                       inputProps={{ 'aria-label': 'controlled' }}
-                      onChange={e => setDate(format(e, 'yyyy-MM-dd'))}
+                      onChange={e => setDate(e)}
                       renderInput={params => <TextField {...params} />}
                     />
                   ) : (
@@ -116,7 +116,7 @@ const AddTransactionModal = ({ open, toggle, refetchTransactions, categories }) 
                       inputFormat="yyyy-MM-dd"
                       value={date}
                       inputProps={{ 'aria-label': 'controlled' }}
-                      onChange={e => setDate(format(e, 'yyyy-MM-dd'))}
+                      onChange={e => setDate(e)}
                       renderInput={params => <TextField {...params} />}
                     />
                   )}
@@ -147,14 +147,14 @@ const AddTransactionModal = ({ open, toggle, refetchTransactions, categories }) 
               onChange={e => setAmount(e.target.value)}
             />
             <FormControl className={styles.formField}>
-              <InputLabel htmlFor="category">Category</InputLabel>
+              <InputLabel htmlFor="categoryId">Category</InputLabel>
               <Select
-                labelId="category"
-                id="category"
-                value={category}
+                labelId="categoryId"
+                id="categoryId"
+                value={categoryId}
                 label="Category"
                 inputProps={{ 'aria-label': 'controlled' }}
-                onChange={e => setCategory(e.target.value)}>
+                onChange={e => setCategoryId(e.target.value)}>
                 {categories.map(cat => (
                   <MenuItem key={cat.id} value={cat.id}>
                     {cat.name}
@@ -213,7 +213,7 @@ const AddTransactionModal = ({ open, toggle, refetchTransactions, categories }) 
                           inputFormat="yyyy-MM-dd"
                           value={endDate}
                           inputProps={{ 'aria-label': 'controlled' }}
-                          onChange={e => setEndDate(format(e, 'yyyy-MM-dd'))}
+                          onChange={e => setEndDate(e)}
                           renderInput={params => <TextField {...params} />}
                         />
                       ) : (
@@ -222,7 +222,7 @@ const AddTransactionModal = ({ open, toggle, refetchTransactions, categories }) 
                           inputFormat="yyyy-MM-dd"
                           value={endDate}
                           inputProps={{ 'aria-label': 'controlled' }}
-                          onChange={e => setEndDate(format(e, 'yyyy-MM-dd'))}
+                          onChange={e => setEndDate(e)}
                           renderInput={params => <TextField {...params} />}
                         />
                       )}
@@ -244,7 +244,7 @@ const AddTransactionModal = ({ open, toggle, refetchTransactions, categories }) 
               variant="contained"
               className={styles.submitButton}
               onClick={submitTransaction}
-              disabled={!amount || !date || !category}>
+              disabled={!amount || !date || !categoryId}>
               Submit
             </Button>
           </Box>

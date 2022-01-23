@@ -25,7 +25,7 @@ const style = {
 
 const AddCategoryModal = ({ open, toggle, refetchCategories }) => {
   const [name, setName] = useState('');
-  const [budget, setBudget] = useState();
+  const [budget, setBudget] = useState('');
 
   const [addCategory] = useAddCategoryMutation();
 
@@ -69,7 +69,7 @@ const AddCategoryModal = ({ open, toggle, refetchCategories }) => {
               variant="contained"
               className={styles.submitButton}
               onClick={submitCategory}
-              disabled={!name}>
+              disabled={!name || !budget}>
               Submit
             </Button>
           </Box>
