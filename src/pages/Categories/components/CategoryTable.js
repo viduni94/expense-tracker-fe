@@ -93,7 +93,7 @@ const CategoryTable = ({ categories, refetchCategories }) => {
           </Alert>
         </div>
       ) : undefined}
-      {selectedCategory ? (
+      {selectedCategory && openEditCategoryModal ? (
         <EditCategoryModal
           open={openEditCategoryModal}
           toggle={toggleEditCategoryModal}
@@ -101,7 +101,7 @@ const CategoryTable = ({ categories, refetchCategories }) => {
           refetchCategories={refetchCategories}
         />
       ) : undefined}
-      {selectedCategory ? (
+      {selectedCategory && openDeleteCategoryConfirmation ? (
         <DeleteCategoryConfirmation
           open={openDeleteCategoryConfirmation}
           toggle={toggleDeleteCategoryConfrimation}

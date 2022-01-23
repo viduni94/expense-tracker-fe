@@ -67,7 +67,7 @@ const EditTransactionModal = ({
       period: isRecurring ? period : undefined,
       frequency: isRecurring ? frequency : undefined,
       endDate: isRecurring ? format(endDate, 'yyyy-MM-dd') : undefined,
-      date: format(date, 'yyyy-MM-dd'),
+      date: typeof date !== 'string' ? format(date, 'yyyy-MM-dd') : date,
     });
 
     if (!error) {

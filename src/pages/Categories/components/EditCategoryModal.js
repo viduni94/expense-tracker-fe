@@ -32,6 +32,8 @@ const EditCategoryModal = ({ open, toggle, selectedCategory, refetchCategories }
   const editCategory = async () => {
     await updateCategory({ id: selectedCategory.id, name, budget });
     refetchCategories();
+    setName('');
+    setBudget('');
     toggle();
   };
 

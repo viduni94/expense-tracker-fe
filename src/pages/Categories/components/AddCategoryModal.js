@@ -31,6 +31,8 @@ const AddCategoryModal = ({ open, toggle, refetchCategories }) => {
 
   const submitCategory = async () => {
     await addCategory({ name, budget });
+    setName('');
+    setBudget('');
     refetchCategories();
     toggle();
   };

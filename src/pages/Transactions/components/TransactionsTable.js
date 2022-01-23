@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Alert from '@mui/material/Alert';
+import LoopIcon from '@mui/icons-material/Loop';
 import styles from '../transactions.module.scss';
 import capitalize from '../../../utils/capitalize';
 import EditTransactionModal from './EditTransactionModal';
@@ -68,8 +69,13 @@ const TransactionsTable = ({ transactions, refetchTransactions, categories }) =>
           <TableBody>
             {transactions.map(tx => (
               <TableRow key={tx.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row">
-                  {tx.note || tx.category.name}
+                <TableCell component="th" scope="row" className={styles.name}>
+                  {tx.note || tx.category.name}{' '}
+                  {tx.recurring ? (
+                    <span>
+                      <LoopIcon fontSize="small" color="info" />
+                    </span>
+                  ) : undefined}
                 </TableCell>
                 <TableCell>{tx.category.name}</TableCell>
                 <TableCell>{capitalize(tx.type)}</TableCell>

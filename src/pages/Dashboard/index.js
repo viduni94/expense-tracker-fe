@@ -75,7 +75,7 @@ const Dashboard = () => {
           <ArrowForwardIosIcon onClick={onClickNext} />
         </div>
         <div className={styles.title}>
-          <h4>Total Income - {parseFloat(totalIncome).toFixed(2)} LKR</h4>
+          <h4>Total Income: {parseFloat(totalIncome).toFixed(2)} GBP</h4>
         </div>
         <Grid
           container
@@ -95,7 +95,7 @@ const Dashboard = () => {
         </Grid>
 
         <div className={cx(styles.title, styles.expenseTitle)}>
-          <h4>Total Expense - {parseFloat(totalExpense).toFixed(2)} LKR</h4>
+          <h4>Total Expense: {parseFloat(totalExpense).toFixed(2)} GBP</h4>
         </div>
         <Grid
           container
@@ -116,7 +116,7 @@ const Dashboard = () => {
       </Container>
       <div className={cx(styles.title, styles.balance)}>
         <h4>
-          Balance - {parseFloat(parseFloat(totalIncome) - parseFloat(totalExpense)).toFixed(2)} LKR
+          Balance: {parseFloat(parseFloat(totalIncome) - parseFloat(totalExpense)).toFixed(2)} GBP
         </h4>
       </div>
     </div>

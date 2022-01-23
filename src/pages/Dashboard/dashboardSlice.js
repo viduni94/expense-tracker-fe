@@ -4,10 +4,10 @@ const initialState = {
   value: 0,
 };
 
-export const categoriesSlice = createSlice({
-  name: 'categories',
+export const dashboardSlice = createSlice({
+  name: 'dashboard',
   initialState,
   reducers: {},
 });
 
-export default categoriesSlice.reducer;
+export default dashboardSlice.reducer;

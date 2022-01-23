@@ -5,7 +5,6 @@ import Navigation from 'components/Navigation';
 import PageLoader from 'components/PageLoader';
 import constants from 'utils/constants';
 
-const Budget = lazy(() => import('pages/Budget'));
 const Categories = lazy(() => import('pages/Categories'));
 const Dashboard = lazy(() => import('pages/Dashboard'));
 const Transactions = lazy(() => import('pages/Transactions'));
@@ -27,8 +26,7 @@ const App = () => {
             <Route path={constants.pages.dashboard.path} element={<Dashboard />} />
             <Route path={constants.pages.transactions.path} element={<Transactions />} />
             <Route path={constants.pages.categories.path} element={<Categories />} />
-            <Route path={constants.pages.budget.path} element={<Budget />} />
-            <Route path={constants.pages.budget.path} element={<Reports />} />
+            <Route path={constants.pages.reports.path} element={<Reports />} />
           </Routes>
         </Suspense>
       </Box>

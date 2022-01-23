@@ -39,7 +39,7 @@ const DeleteTransactionConfirmation = ({
         <DialogContentText id="alert-dialog-description">
           Are you sure you want to delete the transaction{' '}
           {selectedTransaction.note || selectedTransaction.category.name} (
-          {selectedTransaction.amount} LKR)?
+          {selectedTransaction.amount} GBP)?
         </DialogContentText>
       </DialogContent>
       <DialogActions>

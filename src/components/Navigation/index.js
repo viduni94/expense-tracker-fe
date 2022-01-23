@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { CreditScore, ListAlt, LocalOffer, Menu, Receipt, Assessment } from '@mui/icons-material';
+import { ListAlt, LocalOffer, Menu, Receipt, Assessment } from '@mui/icons-material';
 import {
   Toolbar,
   Drawer,
@@ -39,12 +39,6 @@ const drawer = (
         </ListItemIcon>
         <ListItemText primary="Categories" />
       </ListItem>
-      <ListItem button component={Link} to={constants.pages.budget.path}>
-        <ListItemIcon>
-          <CreditScore />
-        </ListItemIcon>
-        <ListItemText primary="Budget" />
-      </ListItem>
       <ListItem button component={Link} to={constants.pages.reports.path}>
         <ListItemIcon>
           <Assessment />
@@ -72,10 +66,6 @@ const Navigation = () => {
     }
     case constants.pages.categories.path: {
       pageTitle = constants.pages.categories.title;
-      break;
-    }
-    case constants.pages.budget.path: {
-      pageTitle = constants.pages.budget.title;
       break;
     }
     case constants.pages.reports.path: {
