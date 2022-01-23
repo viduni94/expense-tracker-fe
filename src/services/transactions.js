@@ -11,8 +11,22 @@ export const transactionsApi = createApi({
       query: () => `${ENTITY_PATH}`,
     }),
     getTransactionByDateRange: builder.query({
-      query: (startDate, endDate) =>
-        `${ENTITY_PATH}/${startDate ? `?startdate=${startDate}&endDate=${endDate}` : ''}`,
+      query: ({ startDate, endDate }) =>
+        `${ENTITY_PATH}${startDate ? `?startDate=${startDate}&endDate=${endDate}` : ''}`,
+      transformResponse: response => {
+        const incomes = [];
+        const expenses = [];
+        response?.map(tx => {
+          if (tx.type === 'income') {
+            return incomes.push(tx);
+          }
+          return expenses.push(tx);
+        });
+        return {
+          incomes,
+          expenses,
+        };
+      },
     }),
     addTransaction: builder.mutation({
       query: transaction => ({

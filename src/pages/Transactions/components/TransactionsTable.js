@@ -61,7 +61,6 @@ const TransactionsTable = ({ transactions, refetchTransactions, categories }) =>
               <StyledTableCell>Type</StyledTableCell>
               <StyledTableCell align="right">Amount</StyledTableCell>
               <StyledTableCell align="center">Date</StyledTableCell>
-              <StyledTableCell align="center">Repeating</StyledTableCell>
               <StyledTableCell>Edit</StyledTableCell>
               <StyledTableCell>Delete</StyledTableCell>
             </TableRow>
@@ -76,7 +75,6 @@ const TransactionsTable = ({ transactions, refetchTransactions, categories }) =>
                 <TableCell>{capitalize(tx.type)}</TableCell>
                 <TableCell align="right">{parseFloat(tx.amount).toFixed(2)}</TableCell>
                 <TableCell align="center">{tx.date}</TableCell>
-                <TableCell align="center">{tx.period ? 'Yes' : 'No'}</TableCell>
                 <TableCell
                   align="center"
                   className={styles.actionIcon}
