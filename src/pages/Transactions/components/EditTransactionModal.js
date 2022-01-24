@@ -41,7 +41,7 @@ const EditTransactionModal = ({
   open,
   toggle,
   selectedTransaction,
-  refetchCategories,
+  refetchTransactions,
   categories,
   setEditError,
 }) => {
@@ -71,7 +71,16 @@ const EditTransactionModal = ({
     });
 
     if (!error) {
-      refetchCategories();
+      refetchTransactions();
+      setType('');
+      setCategoryId('');
+      setAmount('');
+      setNote('');
+      setIsRecurring(false);
+      setDate('');
+      setPeriod(1);
+      setFrequency('months');
+      setEndDate('');
     } else {
       setEditError(error);
     }

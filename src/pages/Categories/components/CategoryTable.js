@@ -68,7 +68,7 @@ const CategoryTable = ({ categories, refetchCategories }) => {
                 <TableCell component="th" scope="row">
                   {category.name}
                 </TableCell>
-                <TableCell align="right">{category.budget}</TableCell>
+                <TableCell align="right">{parseFloat(category.budget).toFixed(2)}</TableCell>
                 <TableCell
                   align="right"
                   className={styles.actionIcon}
